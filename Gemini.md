@@ -29,7 +29,10 @@ graph LR
 -   **Missing Component**: The README and configuration mention **Nostr** support, but `NostrCollector` implementation is **missing** from `src/collectors` and is not initialized in `src/scheduler.py`.
 
 ### 2. Filters (`src/filters`)
--   **PriorityScorer**: Calculates a score for each item based on keywords defined in `config/filters.yaml`. Supports multilingual keywords (en, pt-br).
+-   **PriorityScorer**: Calculates a score for each item based on keywords defined in `config/filters.yaml`. 
+    -   **Positive Scoring**: Boosts priority for critical terms (e.g., "hack", "exploit").
+    -   **Negative Scoring**: Penalizes noise (e.g., "IPO", "ETF", "price prediction") to filter out irrelevant content.
+    -   Supports multilingual keywords (en, pt-br).
 -   **Deduplicator**: Uses Redis to store seen items and check for duplicates within a time window.
 
 ### 3. Notifiers (`src/notifiers`)
