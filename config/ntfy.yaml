@@ -1,0 +1,50 @@
+# ntfy Notification Configuration
+
+# Server settings (can be overridden by environment variables)
+server:
+  url: "${NTFY_URL:-http://localhost:5011}"
+  token: "${NTFY_TOKEN:-}"  # Optional auth token
+
+# Notification topics
+topics:
+  critical: "${NTFY_TOPIC_CRITICAL:-crypto-critical}"
+  regulatory: "${NTFY_TOPIC_REGULATORY:-crypto-regulatory}"
+  protocol: "${NTFY_TOPIC_PROTOCOL:-crypto-protocol}"
+  social: "${NTFY_TOPIC_SOCIAL:-crypto-social}"
+
+# Priority settings for each topic
+# ntfy priorities: 1 (min) to 5 (max/urgent)
+priorities:
+  crypto-critical:
+    priority: 5  # Urgent - loud sound
+    tags: ["rotating_light", "warning"]
+    
+  crypto-regulatory:
+    priority: 4  # High
+    tags: ["scales", "page_facing_up"]
+    
+  crypto-protocol:
+    priority: 3  # Default
+    tags: ["gear", "bitcoin"]
+    
+  crypto-social:
+    priority: 2  # Low
+    tags: ["speech_balloon"]
+
+# Message formatting
+formatting:
+  # Maximum title length
+  max_title_length: 100
+  # Maximum message body length
+  max_body_length: 500
+  # Include source link as action button
+  include_link_action: true
+  # Include timestamp in message
+  include_timestamp: true
+
+# Rate limiting to prevent notification spam
+rate_limit:
+  # Maximum notifications per topic per minute
+  max_per_minute: 10
+  # Cooldown after hitting limit (seconds)
+  cooldown_seconds: 60

@@ -1,0 +1,265 @@
+# RSS Feed Sources Configuration
+# Priority boost is added to the base score for items from this source
+
+rss_feeds:
+  # Security Sources (High priority boost)
+  - name: "Rekt News"
+    url: "https://rekt.news/rss/feed.xml"
+    check_interval: 60
+    priority_boost: 25
+    category: "security"
+
+  - name: "The Hacker News - Crypto"
+    url: "https://feeds.feedburner.com/TheHackersNews"
+    check_interval: 120
+    priority_boost: 15
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange"]
+
+  # Global Crypto News
+  - name: "CoinDesk"
+    url: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+    check_interval: 120
+    priority_boost: 10
+    category: "news"
+
+  - name: "Cointelegraph"
+    url: "https://cointelegraph.com/rss"
+    check_interval: 120
+    priority_boost: 10
+    category: "news"
+
+  - name: "Bitcoin Magazine"
+    url: "https://bitcoinmagazine.com/feed"
+    check_interval: 180
+    priority_boost: 15
+    category: "news"
+
+  # Brazilian Sources (PT-BR)
+  # Note: Portal do Bitcoin is behind Cloudflare and blocks RSS requests
+  - name: "Livecoins"
+    url: "https://livecoins.com.br/feed/"
+    check_interval: 180
+    priority_boost: 10
+    category: "news"
+    language: "pt-br"
+
+  # Protocol Updates
+  - name: "Bitcoin Optech"
+    url: "https://bitcoinops.org/feed.xml"
+    check_interval: 300
+    priority_boost: 20
+    category: "protocol"
+
+  # Hardware Wallets
+  - name: "Trezor Blog"
+    url: "https://blog.trezor.io/feed"
+    check_interval: 300
+    priority_boost: 25
+    category: "hardware"
+
+  - name: "Bitcoin Core Blog"
+    url: "https://bitcoincore.org/en/rss.xml"
+    check_interval: 3600
+    priority_boost: 30
+    category: "protocol"
+
+  - name: "Bitcoin-Dev Mailing List"
+    url: "https://gnusha.org/pi/bitcoindev/atom.xml"
+    check_interval: 3600
+    priority_boost: 25
+    category: "protocol"
+
+  # Security Firms (Medium)
+  - name: "PeckShield"
+    url: "https://medium.com/feed/@PeckShield"
+    check_interval: 300
+    priority_boost: 25
+    category: "security"
+
+  - name: "SlowMist"
+    url: "https://medium.com/slowmist/feed"
+    check_interval: 300
+    priority_boost: 25
+    category: "security"
+
+  # Blockchain Intelligence & Analytics
+
+  # Major Security Research Companies
+  # Note: These require crypto-related keywords to filter relevant content
+  - name: "Malwarebytes Labs"
+    url: "https://www.malwarebytes.com/blog/feed"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "ransomware", "cryptocurrency"]
+
+  - name: "Kaspersky Securelist"
+    url: "https://securelist.com/feed/"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency", "mining"]
+
+  - name: "ESET WeLiveSecurity"
+    url: "https://www.welivesecurity.com/feed/"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  # Sophos News - DISABLED: RSS feed returns 404
+  # - name: "Sophos News"
+  #   url: "https://news.sophos.com/en-us/feed/"
+  #   check_interval: 600
+  #   priority_boost: 20
+  #   category: "security"
+  #   keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency", "ransomware"]
+
+  - name: "CrowdStrike Blog"
+    url: "https://www.crowdstrike.com/en-us/blog/feed/"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  - name: "Trend Micro Research"
+    url: "https://www.trendmicro.com/en_us/research.html/rss"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  - name: "Unit 42 (Palo Alto)"
+    url: "https://unit42.paloaltonetworks.com/feed/"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  - name: "Google Threat Intelligence (Mandiant)"
+    url: "https://cloud.google.com/blog/topics/threat-intelligence/rss"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  - name: "Cisco Talos"
+    url: "http://feeds.feedburner.com/feedburner/Talos"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  # Fortinet FortiGuard Labs - DISABLED: RSS feed returns 404
+  # - name: "Fortinet FortiGuard Labs"
+  #   url: "https://www.fortinet.com/blog/threat-research/rss.xml"
+  #   check_interval: 600
+  #   priority_boost: 20
+  #   category: "security"
+  #   keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  - name: "Check Point Research"
+    url: "https://research.checkpoint.com/feed/"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  - name: "Recorded Future (The Record)"
+    url: "https://therecord.media/feed"
+    check_interval: 600
+    priority_boost: 20
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  - name: "McAfee Labs"
+    url: "https://www.mcafee.com/blogs/feed/"
+    check_interval: 600
+    priority_boost: 15
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  - name: "Avast Threat Research"
+    url: "https://blog.avast.com/rss.xml"
+    check_interval: 600
+    priority_boost: 15
+    category: "security"
+    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+
+  # Blockchain Intelligence & Analytics (continued)
+  - name: "Chainalysis Blog"
+    url: "https://www.chainalysis.com/blog/feed/"
+    check_interval: 3600
+    priority_boost: 20
+    category: "security"
+
+  - name: "Elliptic Blog"
+    url: "https://www.elliptic.co/blog/rss.xml"
+    check_interval: 3600
+    priority_boost: 20
+    category: "security"
+
+  # Hardware Wallets
+  # Note: Coinkite blog is behind Cloudflare and blocks RSS requests
+  - name: "Foundation Devices"
+    url: "https://foundationdevices.com/feed/"
+    check_interval: 3600
+    priority_boost: 20
+    category: "hardware"
+
+  # Protocol Updates
+  - name: "Ethereum Foundation Blog"
+    url: "https://blog.ethereum.org/feed.xml"
+    check_interval: 3600
+    priority_boost: 25
+    category: "protocol"
+
+  - name: "Lightning Labs"
+    url: "https://lightninglabs.substack.com/feed"
+    check_interval: 3600
+    priority_boost: 25
+    category: "protocol"
+
+  - name: "Chainlink Blog"
+    url: "https://blog.chain.link/feed"
+    check_interval: 3600
+    priority_boost: 20
+    category: "protocol"
+
+# Nitter/Twitter Accounts to Monitor
+# Twitter/X Monitoring via Nitter
+# Using a curated list instead of individual accounts to minimize requests
+nitter_accounts:
+  - handle: "i/lists/2010711521144271183"
+    priority_boost: 30
+    category: "custom_list"
+
+# Nostr Public Keys to Monitor
+nostr_accounts:
+  - name: "jack"
+    npub: "npub1sg6plzptd64u62a878hep2kev88swjh3tw00gjsfl8f237lmu63q0uf63m"
+    priority_boost: 15
+    category: "social"
+
+  - name: "nvk"
+    npub: "npub1az9xj85cmxv8e9j9y80grber4t8ljznjwwvcm7e8wxh7lgqj5s0qnllahe"
+    priority_boost: 20
+    category: "security"
+
+  - name: "odell"
+    npub: "npub1qny3tkh0acurzla8x3zy4nhrjz5zd8l9sy9jys09umwng00manysew95gx"
+    priority_boost: 15
+    category: "social"
+
+# Nitter Instance Configuration
+# Enabled: Attempting to use specific working instances.
+# Note: Many public Nitter instances are blocked or rate-limited.
+nitter:
+  enabled: true
+  instances:
+    # Only official Tor instance exists - be gentle with requests
+    - "nitter.catsarchywsyuss6jdxlypsw5dc7owd5u5tr6bujxb7o6xw2hipqehyd.onion"
+  timeout: 60
+  retry_count: 1  # Reduced to avoid hammering
+  check_interval: 600  # 10 minutes - be respectful to the instance

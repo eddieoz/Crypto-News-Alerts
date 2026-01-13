@@ -1,0 +1,13 @@
+aiohttp>=3.9.0
+feedparser>=6.0.10
+redis>=5.0.0
+pyyaml>=6.0
+python-dateutil>=2.8.2
+httpx>=0.25.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+schedule>=1.2.0
+websockets>=12.0
+python-dotenv>=1.0.0
+brotli>=1.0.9
+aiohttp-socks>=0.8.0

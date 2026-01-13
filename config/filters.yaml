@@ -1,0 +1,288 @@
+# Keyword Filters and Priority Scoring Configuration
+
+# Minimum score required to trigger a notification
+minimum_score: 55
+
+# Priority levels and their base scores
+priority_levels:
+  critical: 90
+  high: 70
+  medium: 50
+  low: 30
+
+# Keywords that boost or penalize priority score
+# Each match adds (or subtracts) the specified points to/from the base score
+
+keywords:
+  # NOISE: Investment & Price Action (Score Killer)
+  # -100 ensures these never pass, regardless of source boost
+  investment_noise:
+    score: -100
+    words:
+      - "IPO"
+      - "ETF"
+      - "price analysis"
+      - "market cap"
+      - "top gainer"
+      - " ROI "
+      - "profit"
+      - "trading"
+      - "invest"
+      - "bullish"
+      - "bearish"
+      - "forecast"
+      - "prediction"
+      - "ath"
+      - "atl"
+      - "all-time high"
+      - "all time high"
+      - "buy signal"
+      - "sell signal"
+      - "price prediction"
+      - "scheduled"
+      - "system upgrade"
+
+  # NOISE: Promotional & Spam (Penalty)
+  # -20 helps filter out generic spam, but allows critical security news 
+  # even if it contains these words (e.g. "Airdrop Phishing Scam")
+  promo_noise:
+    score: -20
+    words:
+      - "airdrop"
+      - "giveaway"
+      - "sign up"
+      - "referral"
+      - "bonus"
+      - "presale"
+      - "token sale"
+      - "memecoin"
+      - "pepe"
+      - "doge"
+      - "shiba"
+
+  # CRITICAL: Security breaches, hacks, exploits (EN)
+  critical_en:
+    score: 50
+    words:
+      - "hack"
+      - "hacked"
+      - "exploit"
+      - "exploited"
+      - "breach"
+      - "vulnerability"
+      - "stolen"
+      - "drained"
+      - "rug pull"
+      - "rugpull"
+      - "compromised"
+      - "attack"
+      - "zero-day"
+      - "backdoor"
+      - "malware"
+      - "phishing"
+      - "scam"
+      - "fraud"
+      - "emergency"
+      - "critical vulnerability"
+      - "supply chain attack"
+      - "advisory"
+      - "migration"
+      - "disclosure"
+      - "cve"
+      - "leak"
+
+  # CRITICAL: Security breaches, hacks, exploits (PT-BR)
+  critical_pt:
+    score: 50
+    words:
+      - "hackeado"
+      - "ataque"
+      - "vulnerabilidade"
+      - "roubado"
+      - "drenado"
+      - "golpe"
+      - "fraude"
+      - "comprometido"
+      - "malware"
+      - "phishing"
+      - "emergência"
+      - "vazamento"
+
+  # HIGH: Regulatory news (EN) - REFINED
+  # Removed generic "ETF", "approval", "lawsuit" to focus on enforcement
+  regulatory_en:
+    score: 25
+    words:
+      - "SEC"
+      - "CFTC"
+      - "ban"
+      - "banned"
+      - "enforcement"
+      - "subpoena"
+      - "investigation"
+      - "indictment"
+      - "settlement"
+      - "sanctions"
+      - "money laundering"
+      - "aml"
+      - "kyc"
+
+  # HIGH: Regulatory news (PT-BR) - REFINED
+  regulatory_pt:
+    score: 25
+    words:
+      - "CVM"
+      - "Banco Central"
+      - "BCB"
+      - "proibição"
+      - "processo"
+      - "investigação"
+      - "COAF"
+      - "sancionada"
+
+  # HIGH: Protocol updates
+  protocol:
+    score: 30
+    words:
+      - "hard fork"
+      - "soft fork"
+      - "upgrade"
+      - "BIP"
+      - "release"
+      - "mainnet"
+      - "testnet"
+      - "consensus"
+      - "lightning network"
+      - "taproot"
+      - "segwit"
+      - "halving"
+
+  # HARDWARE: Hardware Wallet Security
+  hardware_wallet:
+    score: 60
+    words:
+      - "firmware"
+      - "vulnerability"
+      - "glitch"
+      - "side-channel"
+      - "physical access"
+      - "secure element"
+      - "seed"
+      - "recovery phrase"
+      - "pin"
+      - "passphrase"
+      - "exploit"
+      - "database leak"
+      - "ledger"
+      - "trezor"
+      - "coldcard"
+      - "bitbox"
+      - "keystone"
+      - "ngrave"
+      - "foundation"
+
+  # SOFTWARE: Software Wallet Risks
+  software_wallet:
+    score: 60
+    words:
+      - "malicious"
+      - "fake app"
+      - "sideload"
+      - "permissions"
+      - "drainer"
+      - "revoke"
+      - "extension"
+      - "browser extension"
+      - "compromised"
+      - "metamask"
+      - "trust wallet"
+      - "phantom"
+      - "rabby"
+      - "coinbase wallet"
+      - "exodus"
+      - "rainbow"
+
+  # EXCHANGE: CEX Security & Critical Updates - REFINED
+  # Removed routine "maintenance", "listing", "deposit"
+  exchange:
+    score: 25
+    words:
+      - "delisting"
+      - "suspend"
+      - "halt"
+      - "audit"
+      - "hack"
+      - "breach"
+      - "compliance"
+      - "liquidated"
+      - "insolvent"
+      - "bankruptcy"
+      - "investigation"
+      - "fined"
+      - "blocked"
+      - "frozen"
+      - "binance"
+      - "coinbase"
+      - "kraken"
+      - "okx"
+      - "mercado bitcoin"
+      - "foxbit"
+      - "bitso"
+      - "novadax"
+
+  # NFT: NFT Platform Security
+  nft:
+    score: 45
+    words:
+      - "exploit"
+      - "hack"
+      - "drained"
+      - "scam"
+      - "phishing"
+      - "stolen"
+      - "compromised"
+      - "rug"
+      - "rugpull"
+      - "opensea"
+      - "blur"
+      - "magic eden"
+
+  # DeFi: Protocol Security
+  defi:
+    score: 25
+    words:
+      - "exploit"
+      - "hack"
+      - "drained"
+      - "flash loan"
+      - "oracle"
+      - "reentrancy"
+      - "slippage"
+      - "bridge"
+      - "bridge hack"
+      - "depeg"
+      - "stablecoin"
+      - "curve"
+      - "lido"
+
+# Category to notification topic mapping
+category_topics:
+  security: "crypto-critical"
+  regulatory: "crypto-regulatory"
+  protocol: "crypto-protocol"
+  news: "crypto-regulatory"
+  social: "crypto-social"
+  hardware: "crypto-critical"
+  software_wallet: "crypto-critical"
+  exchange: "crypto-critical"
+  nft: "crypto-social"
+  defi: "crypto-critical"
+  investment_noise: "ignore"
+  promo_noise: "ignore"
+
+# Deduplication settings
+deduplication:
+  # Time window in seconds to consider items as duplicates
+  window_seconds: 86400  # 24 hours - prevents re-sending on Docker restart
+  # Similarity threshold (0.0 to 1.0) for fuzzy matching
+  similarity_threshold: 0.8

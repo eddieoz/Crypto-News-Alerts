@@ -1,0 +1,66 @@
+services:
+  # ntfy - Push notification server
+  ntfy:
+    image: binwiederhier/ntfy:latest
+    container_name: crypto-alerts-ntfy
+    command:
+      - serve
+    environment:
+      - TZ=America/Sao_Paulo
+    volumes:
+      - ./data/ntfy/cache:/var/cache/ntfy
+      - ./data/ntfy/etc:/etc/ntfy
+    ports:
+      - "5011:80"
+    healthcheck:
+      test: [ "CMD", "wget", "-q", "--tries=1", "http://localhost:80/v1/health", "-O", "-" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Tor Proxy - For bypassing IP blocks
+  tor:
+    image: osminogin/tor-simple
+    container_name: crypto-alerts-tor
+    ports:
+      - "9050:9050"
+    restart: unless-stopped
+
+  # Redis - For caching and deduplication
+  redis:
+    image: redis:alpine
+    container_name: crypto-alerts-redis
+    volumes:
+      - ./data/redis:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  # Alert Collector - Main Python service
+  collector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crypto-alerts-collector
+    environment:
+      - TZ=America/Sao_Paulo
+      - NTFY_URL=http://ntfy:80
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    depends_on:
+      ntfy:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  default:
+    name: crypto-alerts-network
