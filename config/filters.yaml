@@ -1,7 +1,7 @@
 # Keyword Filters and Priority Scoring Configuration
 
 # Minimum score required to trigger a notification
-minimum_score: 55
+minimum_score: 60
 
 # Priority levels and their base scores
 priority_levels:
@@ -46,8 +46,11 @@ keywords:
   # -20 helps filter out generic spam, but allows critical security news 
   # even if it contains these words (e.g. "Airdrop Phishing Scam")
   promo_noise:
-    score: -20
+    score: -80
     words:
+      - "pre sale"
+      - "pre-sale"
+      - "prime sale"
       - "airdrop"
       - "giveaway"
       - "sign up"
@@ -59,6 +62,34 @@ keywords:
       - "pepe"
       - "doge"
       - "shiba"
+      - "Binance Wallet"
+      - "Pre-TGE"
+      - "Binance Futures"
+      - "AMA"
+      - "live price"
+      - "Are you"
+      - "GM"
+      - "Binance Seeds"
+      - "Learn more"
+      - "Perpetual"
+      - "Participate in"
+      - "in rewards"
+      - "New on"
+      - "Trade on-chain"
+      - "chain perps"
+      - "share up"
+      - "best of"
+      - "enabling you"
+      - "new perps"
+      - "went live"
+      - "perps market"
+      - "perps"
+      - "is live"
+      - "aims to raise"
+      - "in IPO"
+      - "to raise"
+
+
 
   # CRITICAL: Security breaches, hacks, exploits (EN)
   critical_en:
