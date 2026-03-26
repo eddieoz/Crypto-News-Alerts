@@ -7,6 +7,7 @@ server:
 
 # Notification topics
 topics:
+  ee_alarm: "${NTFY_TOPIC_EE_ALARM:-EE-ALARM}"
   critical: "${NTFY_TOPIC_CRITICAL:-crypto-critical}"
   regulatory: "${NTFY_TOPIC_REGULATORY:-crypto-regulatory}"
   protocol: "${NTFY_TOPIC_PROTOCOL:-crypto-protocol}"
@@ -15,6 +16,10 @@ topics:
 # Priority settings for each topic
 # ntfy priorities: 1 (min) to 5 (max/urgent)
 priorities:
+  EE-ALARM:
+    priority: 5
+    tags: ["warning", "rotating_light"]
+    
   crypto-critical:
     priority: 5  # Urgent - loud sound
     tags: ["rotating_light", "warning"]

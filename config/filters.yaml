@@ -298,6 +298,7 @@ keywords:
 
 # Category to notification topic mapping
 category_topics:
+  ee_alarm: "EE-ALARM"
   security: "crypto-critical"
   regulatory: "crypto-regulatory"
   protocol: "crypto-protocol"

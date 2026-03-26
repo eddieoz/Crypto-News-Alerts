@@ -2,6 +2,13 @@
 # Priority boost is added to the base score for items from this source
 
 rss_feeds:
+  # EE Kriis Alarm
+  - name: "EE Kriis"
+    url: "https://kriis.ee/en/rss-feeds/rss.xml"
+    check_interval: 60
+    priority_boost: 100
+    category: "ee_alarm"
+
   # Security Sources (High priority boost)
   - name: "Rekt News"
     url: "https://rekt.news/rss/feed.xml"
@@ -263,3 +270,12 @@ nitter:
   timeout: 60
   retry_count: 1  # Reduced to avoid hammering
   check_interval: 600  # 10 minutes - be respectful to the instance
+
+# ERR Search Configuration
+err_search:
+  enabled: true
+  check_interval: 60
+  queries:
+    - phrase: "EE-ALARM"
+      category: "ee_alarm"
+      priority_boost: 100

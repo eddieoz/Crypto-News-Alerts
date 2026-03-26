@@ -54,6 +54,11 @@ class PriorityScorer:
         Returns:
             Tuple of (score, category) where category is the highest scoring match.
         """
+        # Special case: bypass scoring for specific override categories
+        if item.get("category") == "ee_alarm":
+            # Just return a high score and the exact category
+            return max(item.get("priority_boost", 100), 100), "ee_alarm"
+
         # Combine text fields for matching
         title = item.get("title", "")
         summary = item.get("summary", "")

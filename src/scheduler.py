@@ -8,6 +8,7 @@ from typing import Dict, Any, List
 
 from .collectors.rss_collector import RSSCollector
 from .collectors.nitter_collector import NitterCollector
+from .collectors.err_collector import ErrCollector
 from .filters.priority_scorer import PriorityScorer
 from .filters.deduplicator import Deduplicator
 from .notifiers.ntfy_client import NtfyClient
@@ -34,6 +35,7 @@ class AlertScheduler:
             accounts=sources_config.get("nitter_accounts", []),
             instances=sources_config.get("nitter", {}).get("instances", [])
         )
+        self.err_collector = ErrCollector(sources_config.get("err_search", {}))
         self.priority_scorer = PriorityScorer(filters_config)
         self.deduplicator = Deduplicator(filters_config.get("deduplication", {}))
         self.ntfy_client = NtfyClient(ntfy_config)
@@ -51,6 +53,11 @@ class AlertScheduler:
         self._tasks = [
             asyncio.create_task(self._run_rss_collector()),
         ]
+        
+        err_config = self.sources_config.get("err_search", {})
+        if err_config.get("enabled", True) and err_config.get("queries", []):
+            self._tasks.append(asyncio.create_task(self._run_err_collector()))
+            logger.info("ERR Search collector enabled")
         
         # Only start Nitter collector if enabled
         nitter_config = self.sources_config.get("nitter", {})
@@ -100,6 +107,21 @@ class AlertScheduler:
                 await self._process_items(items)
             except Exception as e:
                 logger.error(f"Nitter collector error: {e}")
+            
+            await asyncio.sleep(interval)
+    
+    async def _run_err_collector(self):
+        """Run ERR Search collector loop."""
+        err_config = self.sources_config.get("err_search", {})
+        interval = err_config.get("check_interval", 60)
+        
+        while self._running:
+            try:
+                logger.debug("Checking ERR searches...")
+                items = await self.err_collector.collect()
+                await self._process_items(items)
+            except Exception as e:
+                logger.error(f"ERR collector error: {e}")
             
             await asyncio.sleep(interval)
     
@@ -161,6 +183,7 @@ class AlertScheduler:
     def _get_tags_for_category(self, category: str) -> List[str]:
         """Get emoji tags for notification."""
         tag_map = {
+            "ee_alarm": ["rotating_light", "warning"],
             "security": ["rotating_light", "lock"],
             "regulatory": ["scales", "page_facing_up"],
             "protocol": ["gear", "bitcoin"],
