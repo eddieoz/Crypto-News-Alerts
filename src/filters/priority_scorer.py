@@ -80,7 +80,8 @@ class PriorityScorer:
             
             for pattern, score in patterns:
                 if pattern.search(text):
-                    category_score += score
+                    if category_score == 0:
+                        category_score = score
                     matched_keywords.append(pattern.pattern)
             
             if category_score != 0:

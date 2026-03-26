@@ -166,12 +166,13 @@ rss_feeds:
   #   category: "security"
   #   keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
 
-  - name: "Check Point Research"
-    url: "https://research.checkpoint.com/feed/"
-    check_interval: 600
-    priority_boost: 20
-    category: "security"
-    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+  # Check Point Research - DISABLED: Advanced WAF returns 202 without payload
+  # - name: "Check Point Research"
+  #   url: "https://research.checkpoint.com/feed/"
+  #   check_interval: 600
+  #   priority_boost: 20
+  #   category: "security"
+  #   keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
 
   - name: "Recorded Future (The Record)"
     url: "https://therecord.media/feed"
@@ -180,12 +181,13 @@ rss_feeds:
     category: "security"
     keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
 
-  - name: "McAfee Labs"
-    url: "https://www.mcafee.com/blogs/feed/"
-    check_interval: 600
-    priority_boost: 15
-    category: "security"
-    keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
+  # McAfee Labs - DISABLED: WAF returns 403 Forbidden to Python bots
+  # - name: "McAfee Labs"
+  #   url: "https://www.mcafee.com/blogs/feed/"
+  #   check_interval: 600
+  #   priority_boost: 15
+  #   category: "security"
+  #   keywords_required: ["crypto", "bitcoin", "blockchain", "wallet", "exchange", "cryptocurrency"]
 
   - name: "Avast Threat Research"
     url: "https://blog.avast.com/rss.xml"
