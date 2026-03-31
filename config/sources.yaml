@@ -2,9 +2,15 @@
 # Priority boost is added to the base score for items from this source
 
 rss_feeds:
-  # EE Kriis Alarm
-  - name: "EE Kriis"
-    url: "https://kriis.ee/en/rss-feeds/rss.xml"
+  # # EE Kriis Alarm
+  # - name: "EE Kriis EN"
+  #   url: "https://kriis.ee/en/rss-feeds/rss.xml"
+  #   check_interval: 60
+  #   priority_boost: 100
+  #   category: "ee_alarm"
+  # EE Kriis Alarm EE
+  - name: "EE Kriis EE"
+    url: "https://www.kriis.ee/rss-feeds/rss.xml"
     check_interval: 60
     priority_boost: 100
     category: "ee_alarm"

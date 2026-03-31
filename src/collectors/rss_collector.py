@@ -9,6 +9,7 @@ from typing import Any, Dict, List, Optional
 import aiohttp
 import feedparser
 from dateutil import parser as date_parser
+from urllib.parse import urlparse
 
 logger = logging.getLogger(__name__)
 
@@ -31,9 +32,9 @@ class RSSCollector:
         """Get or create HTTP session."""
         if self._session is None or self._session.closed:
             timeout = aiohttp.ClientTimeout(total=30)
-            # Use browser-like headers to avoid 403 errors
+            # Use browser-like headers to avoid 403 errors, aligned with err_collector
             headers = {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36",
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
                 "Accept-Language": "en-US,en;q=0.5",
                 "Connection": "keep-alive",
@@ -74,8 +75,15 @@ class RSSCollector:
         url = feed_config["url"]
         name = feed_config["name"]
         
+        parsed = urlparse(url)
+        base_url = f"{parsed.scheme}://{parsed.netloc}"
+        headers = {
+            "Origin": base_url,
+            "Referer": base_url + "/"
+        }
+        
         try:
-            async with session.get(url) as response:
+            async with session.get(url, headers=headers) as response:
                 if response.status != 200:
                     logger.warning(f"Feed {name} returned status {response.status}")
                     return []
